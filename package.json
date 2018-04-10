@@ -1,0 +1,29 @@
+{
+  "name": "kanban",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferjul17/kanban.git"
+  },
+  "author": "Julien Ferrier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ferjul17/kanban/issues"
+  },
+  "homepage": "https://github.com/ferjul17/kanban#readme",
+  "devDependencies": {
+    "@types/koa": "^2.0.45",
+    "@types/pg": "^7.4.5",
+    "@types/socket.io": "^1.4.33",
+    "nodemon": "^1.17.3",
+    "typescript": "^2.8.1"
+  },
+  "dependencies": {
+    "koa": "^2.5.0",
+    "pg": "^7.4.1",
+    "socket.io": "^2.1.0"
+  }
+}
