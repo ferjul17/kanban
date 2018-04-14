@@ -1,0 +1,44 @@
+version: "3"
+services:
+  server:
+    image: node:carbon
+    restart: unless-stopped
+    user: node
+    working_dir: /home/node/app
+    depends_on:
+      - postgres
+    volumes:
+      - ./server:/home/node/app
+      - ./wait-for-it/wait-for-it.sh:/home/node/wait-for-it.sh:cached
+    environment:
+      PGHOST: postgres
+      PGDATABASE: postgres
+      PGUSER: postgres
+      PGPASSWORD: password
+      PGPORT: 5432
+    command: sh -c "../wait-for-it.sh $$PGHOST:$$PGPORT && npm i && ./node_modules/.bin/concurrently --kill-others './node_modules/.bin/tsc -w' './node_modules/.bin/nodemon app.js'"
+    ports:
+      - "8080:3000"
+  client:
+    image: node:carbon
+    restart: unless-stopped
+    user: node
+    working_dir: /home/node/app
+    volumes:
+      - ./client:/home/node/app
+    command: sh -c "npm i && npm start"
+    environment:
+      CHOKIDAR_USEPOLLING: 'true'
+    ports:
+      - "80:3000"
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql
+volumes:
+  postgres:
