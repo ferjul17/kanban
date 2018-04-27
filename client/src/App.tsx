@@ -1,22 +1,17 @@
 import * as React from 'react';
+import {connect} from "react-redux";
 import './App.css';
+import Grid from "./Grid/Grid";
+import {IGrid, IStore} from "./Interfaces";
 
-import logo from './logo.svg';
-
-class App extends React.Component {
-  public render() {
+const App = ({grids}: { grids: IGrid[] }) => {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
+        <div>
+            {grids.map((grid) => <Grid key={`grid_${grid.id}`} grid={grid} columns={[]} rows={[]}/>)}
+        </div>
     );
-  }
-}
+};
 
-export default App;
+export default connect((state: IStore) => {
+    return {grids: state.grids};
+})(App);
