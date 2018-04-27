@@ -9,7 +9,7 @@ const Row = (o: { row: IRow, columns: IColumn[] }) => {
     return (
         <div className={"row"}>
             <div className={"cell"}>{row.name}</div>
-            {columns.reduce((cols: any, col) => {
+            {columns.filter((col) => col.gridId === row.gridId).reduce((cols: any, col) => {
                 cols.push(
                     <Cell key={`cell_${row.id}_${col.id}`} rowId={row.id} columnId={col.id}/>
                 );
