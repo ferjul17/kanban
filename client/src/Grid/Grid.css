@@ -1,7 +1,7 @@
 .grid {
     display: table;
     overflow: auto;
-    padding: 5px;
+    padding: 0;
     margin: 5px;
-    border:1px solid chartreuse;
+    border:1px solid #f1f1f1;
 }
