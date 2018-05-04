@@ -1,6 +1,16 @@
 .cell {
     display: table-cell;
-    min-width:120px;
-    border-right:1px solid #f1f1f1;
+    min-width:220px;
+    border-right:1px solid white;
     padding:8px;
+}
+
+.cell:last-child {
+    border-right:0px solid white;
+}
+
+.cell .who {
+	display:inline-block;
+	line-height: 30px;
+	vertical-align: text-bottom;
 }
