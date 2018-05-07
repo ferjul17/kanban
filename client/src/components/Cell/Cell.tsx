@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
+import {ICard, IStore} from "../../Interfaces";
 import Card from "../Card/Card";
-import {ICard, IStore} from "../Interfaces";
 import "./Cell.css";
 
 const Cell = (o: { columnId: number, rowId: number, allCards: ICard[] }) => {

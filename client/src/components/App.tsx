@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {connect} from "react-redux";
+import {IGrid, IStore} from "../Interfaces";
 import './App.css';
 import Grid from "./Grid/Grid";
-import {IGrid, IStore} from "./Interfaces";
 
 const App = ({grids}: { grids: IGrid[] }) => {
     return (

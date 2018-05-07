@@ -1,6 +1,6 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {IColumn, IGrid, IRow, IStore} from "../Interfaces";
+import {IColumn, IGrid, IRow, IStore} from "../../Interfaces";
 import Row from "../Row/Row";
 import "./Grid.css";
 
@@ -25,7 +25,7 @@ const Grid = (o: { grid: IGrid, rows: IRow[], columns: IColumn[] }) => {
     );
 };
 
-export default connect((state: IStore):any => {
+export default connect((state: IStore): any => {
         return {columns: state.columns, rows: state.rows}
     }
 )

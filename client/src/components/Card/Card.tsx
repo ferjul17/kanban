@@ -1,6 +1,6 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {ICard, IStore} from "../Interfaces";
+import {ICard, IStore} from "../../Interfaces";
 import "./Card.css"
 
 const Card = (o: { card: ICard, cards: ICard[] }) => {
