@@ -1,4 +1,5 @@
-import {Action} from "redux";
+import * as _ from "lodash";
+import {addCardActionType, deleteCardActionType} from "./actions";
 import {IStore} from "./Interfaces";
 
 const initialState: IStore = {
@@ -48,42 +49,42 @@ const initialState: IStore = {
         {
             column: 4,
             description: "card description",
-            id: 1,
+            id: 7,
             row: 3,
             title: "card title",
         },
         {
             column: 5,
             description: "card description",
-            id: 2,
+            id: 8,
             row: 4,
             title: "card title",
         },
         {
             column: 6,
             description: "card description",
-            id: 3,
+            id: 9,
             row: 5,
             title: "card title",
         },
         {
             column: 7,
             description: "card description",
-            id: 4,
+            id: 10,
             row: 5,
             title: "card title",
         },
         {
             column: 5,
             description: "card description",
-            id: 5,
+            id: 11,
             row: 4,
             title: "card title",
         },
         {
             column: 5,
             description: "card description",
-            id: 6,
+            id: 12,
             row: 4,
             title: "card title",
         },
@@ -164,6 +165,21 @@ const initialState: IStore = {
     ]
 };
 
-export default (state: IStore = initialState, action: Action<any>): {} => {
-    return state;
+export default (state: IStore = initialState, action: any): {} => {
+    switch (action.type) {
+        case addCardActionType:
+            if (_.findIndex(state.cards, (card) => card.id === action.cardId) !== -1) {
+                state.cards.push(action.card);
+            }
+            _.uniqBy(state.cards, 'id');
+            return state;
+        case deleteCardActionType:
+            const index = _.findIndex(state.cards, (card) => card.id === action.cardId);
+            if (index !== -1) {
+                state.cards.splice(index, 1);
+            }
+            return state;
+        default:
+            return state;
+    }
 }

@@ -1,25 +1,27 @@
+export type IPrimaryKey = number;
+
 export interface ICard {
-    column: number,
-    row: number,
-    id: number,
+    column: IPrimaryKey,
+    row: IPrimaryKey,
+    id: IPrimaryKey,
     description: string,
     title: string,
 }
 
 export interface IColumn {
-    gridId: number,
-    id: number,
+    gridId: IPrimaryKey,
+    id: IPrimaryKey,
     name: string
 }
 
 export interface IGrid {
-    id: number,
+    id: IPrimaryKey,
     name: string
 }
 
 export interface IRow {
-    gridId: number,
-    id: number,
+    gridId: IPrimaryKey,
+    id: IPrimaryKey,
     name: string
 }
 
