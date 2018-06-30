@@ -176,7 +176,7 @@ export default (state: IStore = initialState, action: any): {} => {
         case deleteCardActionType:
             const index = _.findIndex(state.cards, (card) => card.id === action.cardId);
             if (index !== -1) {
-                state.cards.splice(index, 1);
+                state = {...state, cards: [...state.cards.slice(0, index), ...state.cards.slice(index + 1)]};
             }
             return state;
         default:
