@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {IGrid, IStore} from "../Interfaces";
 import './App.css';
 import Grid from "./Grid/Grid";
+import {DragDropContext} from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
 
 const App = ({grids}: { grids: IGrid[] }) => {
     return (
@@ -14,4 +16,4 @@ const App = ({grids}: { grids: IGrid[] }) => {
 
 export default connect((state: IStore) => {
     return {grids: state.grids};
-})(App);
+})(DragDropContext(HTML5Backend)(App));

@@ -1,5 +1,10 @@
 export type IPrimaryKey = number;
 
+export enum ItemTypes {
+    CARD = "card"
+}
+
+
 export interface ICard {
     column: IPrimaryKey,
     row: IPrimaryKey,
@@ -30,4 +35,15 @@ export interface IStore {
     rows: IRow[],
     columns: IColumn[],
     cards: ICard[],
+}
+
+export interface ICardProps {
+    card: ICard;
+    deleteCard: any;
+    updateCard: any;
+    connectDragSource?: any;
+}
+
+export interface ICardState {
+    card: ICard;
 }

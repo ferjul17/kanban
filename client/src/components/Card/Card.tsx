@@ -1,23 +1,28 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import * as Actions from "../../actions";
-import {ICard, IPrimaryKey} from "../../Interfaces";
-import "./Card.css"
 import {Subject, Subscription} from "rxjs";
 import {debounceTime} from "rxjs/operators";
 import {ChangeEvent} from "react";
 
-interface ICardProps {
-    card: ICard;
-    deleteCard: any;
-    updateCard: any;
-}
+import * as Actions from "../../actions";
+import {ICard, IPrimaryKey, ICardProps, ICardState, ItemTypes} from "../../Interfaces";
+import {DEBOUNCE_DELAY} from "../../constants";
 
-interface ICardState {
-    card: ICard;
-}
+import "./Card.css"
+import {DragSource, DragSourceCollector, DragSourceSpec} from "react-dnd";
 
-const DEBOUNCE_DELAY = 300/*ms*/;
+const cardSource: DragSourceSpec<ICardProps> = {
+    beginDrag(props) {
+        console.log("BEGIN DRAG");
+        return props.card;
+    }
+};
+
+const collect: DragSourceCollector = (dndConnect, monitor) => ({
+    connectDragSource: dndConnect.dragSource(),
+    isDragging: monitor.isDragging()
+});
+
 
 class Card extends React.Component<ICardProps, ICardState> {
 
@@ -38,8 +43,13 @@ class Card extends React.Component<ICardProps, ICardState> {
 
     public componentDidMount(): void {
         this.subscriptions.push(
-            this.onTitleChanged$.pipe(debounceTime(DEBOUNCE_DELAY)).subscribe(() => this.props.updateCard(this.state.card)),
-            this.onDescriptionChanged$.pipe(debounceTime(DEBOUNCE_DELAY)).subscribe(() => this.props.updateCard(this.state.card)),
+            this.onTitleChanged$
+                .pipe(debounceTime(DEBOUNCE_DELAY))
+                .subscribe(() => this.props.updateCard(this.state.card)),
+
+            this.onDescriptionChanged$
+                .pipe(debounceTime(DEBOUNCE_DELAY))
+                .subscribe(() => this.props.updateCard(this.state.card)),
         );
     }
 
@@ -52,9 +62,9 @@ class Card extends React.Component<ICardProps, ICardState> {
 
     public render(): React.ReactNode {
 
-        const {deleteCard} = this.props;
+        const {deleteCard, connectDragSource} = this.props;
         const {card} = this.state;
-        return (
+        return connectDragSource(
             <div className={"card"}>
                 <input type={"text"} value={this.state.card.title} onChange={this.onTitleChanged}/>
                 <br/>
@@ -87,4 +97,4 @@ export default connect(undefined, (dispatch) => {
 
         }
     }
-})(Card);
+})(DragSource(ItemTypes.CARD, cardSource, collect)(Card));
