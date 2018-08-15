@@ -3,6 +3,7 @@ import {ICard, IPrimaryKey} from "./Interfaces";
 export enum Actions {
     ADD_CARD,
     DELETE_CARD,
+    UPDATE_CARD,
 }
 
 export interface IAction {
@@ -19,4 +20,9 @@ export const addCard = (card: ICard): IAction => ({
 export const deleteCard = (cardId: IPrimaryKey): IAction => ({
     cardId,
     type: Actions.DELETE_CARD
+});
+
+export const updateCard =(card: ICard): IAction => ({
+    card,
+    type: Actions.UPDATE_CARD
 });

@@ -5,10 +5,13 @@
   "dependencies": {
     "lodash": "^4.17.10",
     "react": "^16.4.2",
+    "react-dnd": "^5.0.0",
+    "react-dnd-html5-backend": "^5.0.1",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
     "react-scripts-ts": "^2.17.0",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "rxjs": "^6.2.2"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -17,13 +20,14 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/jest": "^22.2.3",
+    "@types/jest": "^23.3.1",
     "@types/lodash": "^4.14.116",
-    "@types/node": "^9.6.27",
-    "@types/react": "^16.4.9",
+    "@types/node": "^10.7.0",
+    "@types/react": "^16.4.10",
+    "@types/react-dnd": "^2.0.36",
+    "@types/react-dnd-html5-backend": "^2.1.9",
     "@types/react-dom": "^16.0.7",
-    "@types/react-redux": "^5.0.21",
-    "@types/redux": "^3.6.31",
+    "@types/react-redux": "^6.0.6",
     "typescript": "^2.9.2"
   }
 }

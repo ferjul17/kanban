@@ -168,19 +168,27 @@ const initialState: IStore = {
 
 export default (state: IStore = initialState, action: IAction): {} => {
     switch (action.type) {
-        case Actions.ADD_CARD:
+        case Actions.ADD_CARD: {
             if (_.findIndex(state.cards, (card) => card.id === action.cardId) === -1) {
                 state = {...state, cards: [...state.cards, action.card]}
             }
             state = {...state, cards: [..._.uniqBy(state.cards, 'id')]};
-            return state;
-        case Actions.DELETE_CARD:
+            break;
+        }
+        case Actions.DELETE_CARD: {
             const index = _.findIndex(state.cards, (card) => card.id === action.cardId);
             if (index !== -1) {
                 state = {...state, cards: [...state.cards.slice(0, index), ...state.cards.slice(index + 1)]};
             }
-            return state;
-        default:
-            return state;
+            break
+        }
+        case Actions.UPDATE_CARD: {
+            const index = _.findIndex(state.cards, (card) => card.id === action.card.id);
+            if (index !== -1) {
+                state = {...state, cards: [...state.cards.slice(0, index), action.card, ...state.cards.slice(index + 1)]};
+            }
+            break;
+        }
     }
+    return state;
 }
