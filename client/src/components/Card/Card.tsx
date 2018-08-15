@@ -7,9 +7,9 @@ import "./Card.css"
 const Card = (o: { card: ICard, cards: ICard[], deleteCard: any }) => {
     return (
         <div className={"card"}>
-            <input type={"text"} defaultValue={"Title"}/>
+            <input type={"text"} defaultValue={"Title"} value={o.card.title}/>
             <br/>
-            <textarea defaultValue={"Description"}/>
+            <textarea defaultValue={"Description"} value={o.card.description}/>
             <br/>
             <button onClick={o.deleteCard(o.card.id)}>Delete</button>
         </div>
