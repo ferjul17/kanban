@@ -1,5 +1,6 @@
 import * as _ from "lodash";
-import {addCardActionType, deleteCardActionType} from "./actions";
+
+import {Actions, IAction} from "./actions";
 import {IStore} from "./Interfaces";
 
 const initialState: IStore = {
@@ -165,15 +166,15 @@ const initialState: IStore = {
     ]
 };
 
-export default (state: IStore = initialState, action: any): {} => {
+export default (state: IStore = initialState, action: IAction): {} => {
     switch (action.type) {
-        case addCardActionType:
+        case Actions.ADD_CARD:
             if (_.findIndex(state.cards, (card) => card.id === action.cardId) === -1) {
                 state = {...state, cards: [...state.cards, action.card]}
             }
             state = {...state, cards: [..._.uniqBy(state.cards, 'id')]};
             return state;
-        case deleteCardActionType:
+        case Actions.DELETE_CARD:
             const index = _.findIndex(state.cards, (card) => card.id === action.cardId);
             if (index !== -1) {
                 state = {...state, cards: [...state.cards.slice(0, index), ...state.cards.slice(index + 1)]};

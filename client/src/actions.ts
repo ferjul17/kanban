@@ -1,14 +1,22 @@
 import {ICard, IPrimaryKey} from "./Interfaces";
 
-export const addCardActionType = "ADD_CARD";
-export const deleteCardActionType = "DELETE_CARD";
+export enum Actions {
+    ADD_CARD,
+    DELETE_CARD,
+}
 
-export const addCard = (card: ICard) => ({
+export interface IAction {
+    type: Actions,
+
+    [key: string]: any
+}
+
+export const addCard = (card: ICard): IAction => ({
     card,
-    type: addCardActionType,
+    type: Actions.ADD_CARD,
 });
 
-export const deleteCard = (cardId: IPrimaryKey) => ({
+export const deleteCard = (cardId: IPrimaryKey): IAction => ({
     cardId,
-    type: deleteCardActionType
+    type: Actions.DELETE_CARD
 });
