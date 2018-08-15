@@ -168,10 +168,10 @@ const initialState: IStore = {
 export default (state: IStore = initialState, action: any): {} => {
     switch (action.type) {
         case addCardActionType:
-            if (_.findIndex(state.cards, (card) => card.id === action.cardId) !== -1) {
-                state.cards.push(action.card);
+            if (_.findIndex(state.cards, (card) => card.id === action.cardId) === -1) {
+                state = {...state, cards: [...state.cards, action.card]}
             }
-            _.uniqBy(state.cards, 'id');
+            state = {...state, cards: [..._.uniqBy(state.cards, 'id')]};
             return state;
         case deleteCardActionType:
             const index = _.findIndex(state.cards, (card) => card.id === action.cardId);
